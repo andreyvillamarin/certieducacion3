@@ -1,0 +1,10 @@
+[22-Jul-2025 07:20:53 America/Bogota] Antes de establecer la sesión: Array
+(
+)
+
+[22-Jul-2025 07:20:53 America/Bogota] Después de establecer la sesión: Array
+(
+    [student_id] => 1
+    [logged_in] => 1
+)
+
