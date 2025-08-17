@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form action="2fa_setup.php" method="POST">
                         <input type="hidden" name="action" value="disable_2fa">
                         <div class="mb-3">
-                            <label for="password_confirm_disable" class="form-label">Confirma tu Contraseña para Desactivar</label>
+                            <label for="password_confirm_disable" class="form-label">Confirma tu Contraseña de Administrador para Desactivar</label>
                             <input type="password" class="form-control" id="password_confirm_disable" name="password_confirm" required>
                         </div>
                         <button type="submit" class="btn btn-danger w-100">Desactivar 2FA</button>
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <input type="text" class="form-control" id="code" name="code" required pattern="[0-9]{6}" title="Ingresa un código de 6 dígitos">
                             </div>
                             <div class="mb-3">
-                                <label for="password_confirm" class="form-label">3. Confirma tu Contraseña</label>
+                                <label for="password_confirm" class="form-label">3. Confirma tu Contraseña de Administrador</label>
                                 <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
                             </div>
                             <button type="submit" class="btn btn-success w-100">Confirmar y Activar 2FA</button>

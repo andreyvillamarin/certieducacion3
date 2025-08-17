@@ -1,0 +1,318 @@
+[16-Aug-2025 14:52:21 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Algorithm" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:35
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(30): [constant expression]()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(26): RobThree\Auth\TwoFactorAuth->__construct()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 35
+[16-Aug-2025 14:52:23 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Algorithm" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:35
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(30): [constant expression]()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(26): RobThree\Auth\TwoFactorAuth->__construct()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 35
+[16-Aug-2025 14:52:25 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Algorithm" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:35
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(30): [constant expression]()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(26): RobThree\Auth\TwoFactorAuth->__construct()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 35
+[16-Aug-2025 14:55:12 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 27 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(27): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[16-Aug-2025 14:55:14 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 27 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(27): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[16-Aug-2025 14:57:07 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[16-Aug-2025 14:58:34 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[16-Aug-2025 14:58:36 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[16-Aug-2025 15:01:49 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[16-Aug-2025 15:04:07 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[17-Aug-2025 14:33:14 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[17-Aug-2025 14:33:20 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[17-Aug-2025 14:33:27 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[17-Aug-2025 14:33:33 America/Bogota] PHP Fatal error:  Uncaught TypeError: RobThree\Auth\TwoFactorAuth::__construct(): Argument #5 ($algorithm) must be of type RobThree\Auth\Algorithm, string given, called in /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php on line 28 and defined in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:30
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(28): RobThree\Auth\TwoFactorAuth->__construct()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 30
+[17-Aug-2025 14:45:40 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Providers\Rng\CSRNGProvider" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:167
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(58): RobThree\Auth\TwoFactorAuth->getRngProvider()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(51): RobThree\Auth\TwoFactorAuth->createSecret()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 167
+[17-Aug-2025 14:46:28 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Providers\Rng\CSRNGProvider" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:167
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(58): RobThree\Auth\TwoFactorAuth->getRngProvider()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(51): RobThree\Auth\TwoFactorAuth->createSecret()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 167
+[17-Aug-2025 14:53:33 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Providers\Rng\CSRNGProvider" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:167
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(58): RobThree\Auth\TwoFactorAuth->getRngProvider()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(51): RobThree\Auth\TwoFactorAuth->createSecret()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 167
+[17-Aug-2025 14:59:30 America/Bogota] PHP Fatal error:  strict_types declaration must be the very first statement in the script in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 4
+[17-Aug-2025 14:59:35 America/Bogota] PHP Fatal error:  strict_types declaration must be the very first statement in the script in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 4
+[17-Aug-2025 15:00:38 America/Bogota] PHP Fatal error:  strict_types declaration must be the very first statement in the script in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 5
+[17-Aug-2025 15:10:03 America/Bogota] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 7
+[17-Aug-2025 15:10:07 America/Bogota] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 7
+[17-Aug-2025 15:10:12 America/Bogota] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 7
+[17-Aug-2025 15:17:03 America/Bogota] PHP Warning:  require_once(/home/qdosnetw/public_html/demos/certieducacion3/libs/Providers/Rng/IRNGProvider.php): Failed to open stream: No such file or directory in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 7
+[17-Aug-2025 15:17:03 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required '/home/qdosnetw/public_html/demos/certieducacion3/libs/Providers/Rng/IRNGProvider.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:7
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(7): require_once()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 7
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 0.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 1.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 2.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 3.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 4.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 5.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 6.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 7.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 8.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 9.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 10.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 11.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 12.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 13.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 14.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 15.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 16.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 17.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 18.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 19.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 20.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 21.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 22.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 23.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 24.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 25.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 26.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 27.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 28.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 29.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 30.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 31.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 32.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 33.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 34.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 35.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 36.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 37.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 38.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 39.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 40.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 41.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 42.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 43.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 44.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 45.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 46.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 47.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 48.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 49.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 50.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 51.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 52.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 53.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 54.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 55.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 56.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 57.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 58.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 59.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 60.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 61.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 62.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 63.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 64.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 65.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 66.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 67.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 0.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 1.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 2.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 3.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 4.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 5.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 6.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 7.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 8.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 9.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 10.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 11.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 12.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 13.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 14.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 15.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 16.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:19:16 America/Bogota] PHP Deprecated:  Implicit conversion from float 17.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 0.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 1.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 2.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 3.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 4.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 5.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 6.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 7.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 8.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 9.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 10.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 11.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 12.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 13.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 14.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 15.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 16.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 17.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 18.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 19.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 20.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 21.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 22.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 23.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 24.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 25.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 26.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 27.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 28.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 29.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 30.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 31.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 32.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 33.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 34.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 35.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 36.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 37.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 38.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 39.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 40.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 41.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 42.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 43.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 44.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 45.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 46.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 47.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 48.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 49.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 50.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 51.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 52.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 53.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 54.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 55.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 56.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 57.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 58.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 59.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 60.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 61.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 62.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 63.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 64.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 65.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 66.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 67.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 140
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 0.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 1.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 2.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 3.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 4.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 5.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 6.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 7.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 8.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 9.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 10.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 11.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 12.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 13.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 14.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 15.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 16.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:20:06 America/Bogota] PHP Deprecated:  Implicit conversion from float 17.5 to int loses precision in /home/qdosnetw/public_html/demos/certieducacion3/libs/PHPQRCode/qrencode.php on line 144
+[17-Aug-2025 15:28:15 America/Bogota] PHP Fatal error:  Uncaught Error: Class "chillerlan\Settings\SettingsContainerAbstract" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/QRCode/QROptions.php:19
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/autoloader.php(27): require()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php(22): {closure}()
+#2 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(119): CustomQRCodeProvider->getQRCodeImage()
+#3 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(54): RobThree\Auth\TwoFactorAuth->getQRCodeImageAsDataUri()
+#4 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/QRCode/QROptions.php on line 19
+[17-Aug-2025 15:34:36 America/Bogota] PHP Parse error:  syntax error, unexpected token "$", expecting variable in /home/qdosnetw/public_html/demos/certieducacion3/libs/autoloader.php on line 3
+[17-Aug-2025 15:43:30 America/Bogota] PHP Fatal error:  Class chillerlan\QRCode\QROptions must implement interface Traversable as part of either Iterator or IteratorAggregate in Unknown on line 0
+[17-Aug-2025 15:46:16 America/Bogota] PHP Fatal error:  Uncaught Error: Undefined constant chillerlan\QRCode\QRCode::OUTPUT_MARKUP_SVG in /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php:23
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(119): CustomQRCodeProvider->getQRCodeImage()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(54): RobThree\Auth\TwoFactorAuth->getQRCodeImageAsDataUri()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php on line 23
+[17-Aug-2025 15:47:49 America/Bogota] PHP Fatal error:  Uncaught Error: Undefined constant chillerlan\QRCode\QRCode::OUTPUT_MARKUP_SVG in /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php:23
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(119): CustomQRCodeProvider->getQRCodeImage()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(54): RobThree\Auth\TwoFactorAuth->getQRCodeImageAsDataUri()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php on line 23
+[17-Aug-2025 15:54:41 America/Bogota] PHP Fatal error:  Uncaught Error: Undefined constant chillerlan\QRCode\Output\QROutputInterface::MARKUP_SVG in /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php:24
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(119): CustomQRCodeProvider->getQRCodeImage()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(54): RobThree\Auth\TwoFactorAuth->getQRCodeImageAsDataUri()
+#2 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/CustomQRCodeProvider.php on line 24
+[17-Aug-2025 16:08:13 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\Auth\Providers\Time\LocalMachineTimeProvider" not found in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php:173
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(178): RobThree\Auth\TwoFactorAuth->getTimeProvider()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php(90): RobThree\Auth\TwoFactorAuth->getTime()
+#2 /home/qdosnetw/public_html/demos/certieducacion3/admin/2fa_setup.php(69): RobThree\Auth\TwoFactorAuth->verifyCode()
+#3 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/libs/TwoFactorAuth.php on line 173
+[17-Aug-2025 16:15:36 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\TwoFactorAuth\TwoFactorAuth" not found in /home/qdosnetw/public_html/demos/certieducacion3/admin/verify_2fa.php:41
+Stack trace:
+#0 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/verify_2fa.php on line 41
+[17-Aug-2025 16:16:04 America/Bogota] PHP Fatal error:  Uncaught Error: Class "RobThree\TwoFactorAuth\TwoFactorAuth" not found in /home/qdosnetw/public_html/demos/certieducacion3/admin/verify_2fa.php:41
+Stack trace:
+#0 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/verify_2fa.php on line 41

@@ -39,6 +39,7 @@ $admin_role = $_SESSION['admin_role'];
                 <a href="settings.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-cogs me-2"></i>Configuración</a>
                 <?php endif; ?>
                 <a href="profile.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-circle me-2"></i>Mi Perfil</a>
+                <a href="2fa_setup.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-shield-alt me-2"></i>Seguridad 2FA</a>
             </div>
         </div>
         <div id="page-content-wrapper">

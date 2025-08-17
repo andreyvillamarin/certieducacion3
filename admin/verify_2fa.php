@@ -2,9 +2,13 @@
 // admin/verify_2fa.php
 require_once '../config.php';
 require_once '../includes/database.php';
-require_once ROOT_PATH . '/libs/TwoFactorAuth.php';
 
-use RobThree\TwoFactorAuth\TwoFactorAuth;
+// Cargar la librería 2FA y TODAS sus dependencias
+require_once ROOT_PATH . '/libs/Algorithm.php';
+require_once ROOT_PATH . '/libs/TwoFactorAuth.php';
+require_once ROOT_PATH . '/libs/CustomQRCodeProvider.php'; // Necesario para el constructor
+
+use RobThree\Auth\TwoFactorAuth; // Correct namespace
 
 // Si no hay un ID de admin pendiente de 2FA, redirigir al login.
 if (!isset($_SESSION['2fa_admin_id'])) {
@@ -21,7 +25,6 @@ try {
     $stmt->execute([$admin_id]);
     $admin = $stmt->fetch();
     if (!$admin || empty($admin['2fa_secret'])) {
-        // Si no hay secreto o el admin no existe, destruir sesión y redirigir
         session_destroy();
         header('Location: index.php');
         exit;
@@ -38,14 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($code)) {
         $error_message = 'Por favor, ingresa el código de verificación.';
     } else {
-        $tfa = new TwoFactorAuth('CertiEducacion Admin');
+        // Instanciar correctamente, incluyendo el proveedor de QR que el constructor necesita
+        $qrProvider = new CustomQRCodeProvider();
+        $tfa = new TwoFactorAuth($qrProvider, 'CertiEducacion Admin');
+        
         if ($tfa->verifyCode($admin['2fa_secret'], $code)) {
             // Código correcto. Finalizar el inicio de sesión.
             session_regenerate_id(true);
             $_SESSION['admin_id'] = $admin_id;
             $_SESSION['admin_username'] = $admin['username'];
             $_SESSION['admin_role'] = $admin['role'];
-            unset($_SESSION['2fa_admin_id']); // Limpiar la sesión temporal
+            unset($_SESSION['2fa_admin_id']);
 
             header('Location: dashboard.php');
             exit;

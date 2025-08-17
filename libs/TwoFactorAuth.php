@@ -1,8 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
 namespace RobThree\Auth;
+
+require_once __DIR__ . '/Providers/Rng/IRNGProvider.php';
+require_once __DIR__ . '/Providers/Rng/CSRNGProvider.php';
+require_once __DIR__ . '/Providers/Time/ITimeProvider.php';
+require_once __DIR__ . '/Providers/Time/LocalMachineTimeProvider.php';
 
 use function hash_equals;
 
@@ -109,11 +113,8 @@ class TwoFactorAuth
         if ($size <= 0) {
             throw new TwoFactorAuthException('Size must be > 0');
         }
-
-        return 'data:'
-            . $this->qrcodeprovider->getMimeType()
-            . ';base64,'
-            . base64_encode($this->qrcodeprovider->getQRCodeImage($this->getQRText($label, $secret), $size));
+        // El proveedor ahora devuelve el data URI completo, así que simplemente lo devolvemos directamente.
+        return $this->qrcodeprovider->getQRCodeImage($this->getQRText($label, $secret), $size);
     }
 
     /**

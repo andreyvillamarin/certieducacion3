@@ -1,9 +1,9 @@
 <?php
 namespace RobThree\Auth;
 
-class Algorithm
+enum Algorithm: string
 {
-    const Sha1 = 'sha1';
-    const Sha256 = 'sha256';
-    const Sha512 = 'sha512';
+    case Sha1 = 'sha1';
+    case Sha256 = 'sha256';
+    case Sha512 = 'sha512';
 }
