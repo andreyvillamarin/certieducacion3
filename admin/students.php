@@ -18,23 +18,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if ($student_id_to_delete) {
         try {
             // Obtener datos del estudiante ANTES de eliminar para el log
-            $stmt_get = $pdo->prepare("SELECT name, identification FROM students WHERE id = ?");
+            // Obtener datos del estudiante ANTES de eliminar para el log
+            $stmt_get = $pdo->prepare("SELECT name, identification FROM students WHERE id = ? AND deleted_at IS NULL");
             $stmt_get->execute([$student_id_to_delete]);
             $student_data_for_log = $stmt_get->fetch(PDO::FETCH_ASSOC);
 
-            $stmt_delete = $pdo->prepare("DELETE FROM students WHERE id = ?");
-            $stmt_delete->execute([$student_id_to_delete]);
+            // CORRECCIÓN: Cambiar DELETE por UPDATE para borrado suave
+            $stmt_soft_delete = $pdo->prepare("UPDATE students SET deleted_at = NOW() WHERE id = ?");
+            $stmt_soft_delete->execute([$student_id_to_delete]);
 
-            if ($stmt_delete->rowCount() > 0) {
-                $_SESSION['notification'] = ['type' => 'success', 'message' => 'Estudiante eliminado correctamente.'];
-                // Registrar actividad
+            if ($stmt_soft_delete->rowCount() > 0) {
+                $_SESSION['notification'] = ['type' => 'success', 'message' => 'Estudiante desactivado correctamente.'];
+                // Registrar actividad de borrado suave
                 if (function_exists('log_activity') && $student_data_for_log) {
                     $current_admin_id_for_log = $_SESSION['admin_id'] ?? null;
-                    $log_details_delete = "Estudiante eliminado: Nombre: {$student_data_for_log['name']}, ID SIS: {$student_id_to_delete}, Identificación: {$student_data_for_log['identification']}.";
-                    log_activity($pdo, $current_admin_id_for_log, 'estudiante_eliminado', $student_id_to_delete, 'students', $log_details_delete);
+                    $log_details_delete = "Estudiante desactivado (borrado suave): Nombre: {$student_data_for_log['name']}, ID SIS: {$student_id_to_delete}, Identificación: {$student_data_for_log['identification']}.";
+                    log_activity($pdo, $current_admin_id_for_log, 'estudiante_desactivado', $student_id_to_delete, 'students', $log_details_delete);
                 }
             } else {
-                $_SESSION['notification'] = ['type' => 'warning', 'message' => 'No se encontró el estudiante para eliminar o ya fue eliminado.'];
+                $_SESSION['notification'] = ['type' => 'warning', 'message' => 'No se encontró el estudiante para desactivar o ya estaba inactivo.'];
             }
         } catch (PDOException $e) {
             error_log("Error al eliminar estudiante (students.php): " . $e->getMessage());
@@ -53,13 +55,33 @@ if (isset($_SESSION['notification'])) {
     unset($_SESSION['notification']);
 }
 $search_term = $_GET['search'] ?? '';
-$sql = "SELECT id, name, identification, phone, email FROM students";
-if (!empty($search_term)) {
-    $sql .= " WHERE name LIKE ? OR identification LIKE ?";
+$view = $_GET['view'] ?? 'active'; // 'active' o 'archived'
+
+$list_title = 'Listado de Estudiantes Activos';
+$sql = "SELECT id, name, identification, phone, email, deleted_at FROM students";
+$params = [];
+$where_conditions = [];
+
+if ($view === 'archived') {
+    $list_title = 'Listado de Estudiantes Archivados';
+    $where_conditions[] = "deleted_at IS NOT NULL";
+} else {
+    // Vista por defecto y vista 'active'
+    $where_conditions[] = "deleted_at IS NULL";
 }
+
+if (!empty($search_term)) {
+    $where_conditions[] = "(name LIKE ? OR identification LIKE ?)";
+    $params[] = "%$search_term%";
+    $params[] = "%$search_term%";
+}
+
+if (!empty($where_conditions)) {
+    $sql .= " WHERE " . implode(' AND ', $where_conditions);
+}
+
 $sql .= " ORDER BY name ASC";
 $stmt = $pdo->prepare($sql);
-$params = !empty($search_term) ? ["%$search_term%", "%$search_term%"] : [];
 $stmt->execute($params);
 $students = $stmt->fetchAll();
 ?>
@@ -76,8 +98,10 @@ $students = $stmt->fetchAll();
 
 <div class="card shadow-sm mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Listado de Estudiantes</h5>
+        <h5 class="mb-0" id="student-list-title"><?php echo htmlspecialchars($list_title); ?></h5>
         <div>
+            <a href="students.php?view=archived" class="btn btn-secondary btn-sm"><i class="fas fa-archive me-1"></i> Ver Archivados</a>
+            <a href="students.php" class="btn btn-light btn-sm"><i class="fas fa-user-check me-1"></i> Ver Activos</a>
             <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#uploadCsvModal"><i class="fas fa-file-csv me-1"></i> Cargar CSV</button>
             <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addStudentModal"><i class="fas fa-plus me-1"></i> Agregar Estudiante</button>
         </div>
@@ -85,7 +109,8 @@ $students = $stmt->fetchAll();
     <div class="card-body">
         <form action="students.php" method="GET" class="mb-3">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Buscar por nombre o identificación..." value="<?php echo htmlspecialchars($search_term); ?>">
+                <input type="hidden" name="view" value="<?php echo htmlspecialchars($view); ?>">
+                <input type="text" name="search" class="form-control" placeholder="Buscar en vista actual..." value="<?php echo htmlspecialchars($search_term); ?>">
                 <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
             </div>
         </form>
@@ -96,14 +121,23 @@ $students = $stmt->fetchAll();
                     <?php if (empty($students)): ?>
                         <tr><td colspan="5" class="text-center">No se encontraron estudiantes.</td></tr>
                     <?php else: foreach ($students as $student): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($student['name']); ?></td>
+                        <tr class="<?php echo $student['deleted_at'] ? 'table-danger' : ''; ?>">
+                            <td>
+                                <?php echo htmlspecialchars($student['name']); ?>
+                                <?php if ($student['deleted_at']): ?>
+                                    <span class="badge bg-danger ms-2">Desactivado</span>
+                                <?php endif; ?>
+                            </td>
                             <td><?php echo htmlspecialchars($student['identification']); ?></td>
                             <td><?php echo htmlspecialchars($student['phone']); ?></td>
                             <td><?php echo htmlspecialchars($student['email']); ?></td>
                             <td class="text-end">
-                                <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editStudentModal" data-id="<?php echo $student['id']; ?>"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal" data-id="<?php echo $student['id']; ?>" data-name="<?php echo htmlspecialchars($student['name']); ?>"><i class="fas fa-trash"></i></button>
+                                <?php if ($student['deleted_at']): ?>
+                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addStudentModal" title="Reactivar Estudiante" data-id="<?php echo $student['id']; ?>" data-name="<?php echo htmlspecialchars($student['name']); ?>" data-identification="<?php echo htmlspecialchars($student['identification']); ?>" data-phone="<?php echo htmlspecialchars($student['phone']); ?>" data-email="<?php echo htmlspecialchars($student['email']); ?>"><i class="fas fa-undo"></i></button>
+                                <?php else: ?>
+                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editStudentModal" data-id="<?php echo $student['id']; ?>" title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal" data-id="<?php echo $student['id']; ?>" data-name="<?php echo htmlspecialchars($student['name']); ?>" title="Desactivar"><i class="fas fa-trash"></i></button>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; endif; ?>

@@ -8,7 +8,7 @@ $start_date = $_GET['start_date'] ?? '';
 $end_date = $_GET['end_date'] ?? '';
 $filter_admin_id = isset($_GET['filter_admin_id']) ? (int)$_GET['filter_admin_id'] : null;
 
-// CORRECCIÓN: Se elimina la referencia a 'a.name'.
+// CORRECCIÓN: Se selecciona el estado de borrado para uso futuro.
 $sql = "SELECT 
             c.id, 
             c.course_name, 
@@ -17,29 +17,67 @@ $sql = "SELECT
             c.generation_timestamp, 
             s.name as student_name, 
             s.identification,
-            a.username as admin_username
+            a.username as admin_username,
+            c.deleted_at as certificate_deleted_at,
+            s.deleted_at as student_deleted_at
         FROM certificates c 
         JOIN students s ON c.student_id = s.id 
-        LEFT JOIN admins a ON c.generated_by_user_id = a.id
-        WHERE 1=1";
+        LEFT JOIN admins a ON c.generated_by_user_id = a.id";
 
 $params = [];
-if (!empty($search_text)) {
-    // CORRECCIÓN: Se elimina la referencia a 'a.name' en la búsqueda.
-    $sql .= " AND (s.name LIKE :search_text OR s.identification LIKE :search_text OR c.course_name LIKE :search_text OR a.username LIKE :search_text)";
-    $params[':search_text'] = "%$search_text%";
+$where_clauses = [];
+
+// Condición base: solo mostrar registros activos por defecto.
+// La búsqueda avanzada (siguiente paso) modificará esto.
+if (empty($search_text)) {
+    $where_clauses[] = "c.deleted_at IS NULL";
+    $where_clauses[] = "s.deleted_at IS NULL";
 }
+
+if (!empty($search_text)) {
+    // --- Lógica de búsqueda mejorada ---
+    $search_conditions = [];
+    
+    // Búsqueda por identificación, curso, o admin (texto completo)
+    $search_conditions[] = "s.identification LIKE ?";
+    $params[] = "%$search_text%";
+    $search_conditions[] = "c.course_name LIKE ?";
+    $params[] = "%$search_text%";
+    $search_conditions[] = "a.username LIKE ?";
+    $params[] = "%$search_text%";
+
+    // Búsqueda por palabras en el nombre del estudiante
+    $name_words = array_filter(explode(' ', $search_text));
+    if (!empty($name_words)) {
+        $name_conditions = [];
+        foreach ($name_words as $word) {
+            $name_conditions[] = "s.name LIKE ?";
+            $params[] = "%$word%";
+        }
+        $search_conditions[] = "(" . implode(' AND ', $name_conditions) . ")";
+    }
+    
+    // Añade el grupo de condiciones de búsqueda
+    $where_clauses[] = "(" . implode(' OR ', $search_conditions) . ")";
+}
+
+// Filtros de fecha y admin
 if (!empty($start_date)) {
-    $sql .= " AND DATE(c.generation_timestamp) >= :start_date";
-    $params[':start_date'] = $start_date;
+    $where_clauses[] = "DATE(c.generation_timestamp) >= ?";
+    $params[] = $start_date;
 }
 if (!empty($end_date)) {
-    $sql .= " AND DATE(c.generation_timestamp) <= :end_date";
-    $params[':end_date'] = $end_date;
+    $where_clauses[] = "DATE(c.generation_timestamp) <= ?";
+    $params[] = $end_date;
 }
 if ($filter_admin_id !== null && $filter_admin_id > 0) {
-    $sql .= " AND c.generated_by_user_id = :filter_admin_id";
-    $params[':filter_admin_id'] = $filter_admin_id;
+    $where_clauses[] = "c.generated_by_user_id = ?";
+    $params[] = $filter_admin_id;
+}
+
+// Construir la cláusula WHERE final
+if (!empty($where_clauses)) {
+    $sql .= " WHERE " . implode(' AND ', $where_clauses);
 }
 
 $sql .= " ORDER BY c.generation_timestamp DESC, s.name ASC";
@@ -114,19 +152,30 @@ if (isset($_GET['message'])) {
                     <tbody>
                         <?php if (empty($certificates)): ?>
                             <tr><td colspan="8" class="text-center">No se encontraron certificados.</td></tr>
-                        <?php else: foreach ($certificates as $cert): ?>
-                            <tr>
-                                <td><input type="checkbox" name="certificate_ids[]" value="<?php echo $cert['id']; ?>" class="certificate-checkbox"></td>
-                                <td><?php echo htmlspecialchars($cert['student_name']); ?></td>
-                                <td><?php echo htmlspecialchars($cert['identification']); ?></td>
-                                <td><?php echo htmlspecialchars($cert['course_name']); ?></td>
-                                <td><?php echo date("d/m/Y", strtotime($cert['issue_date'])); ?></td>
+                        <?php else: foreach ($certificates as $cert): 
+                            $is_cert_deleted = !is_null($cert['certificate_deleted_at']);
+                            $is_student_deleted = !is_null($cert['student_deleted_at']);
+                            $row_class = $is_cert_deleted ? 'table-danger' : ($is_student_deleted ? 'table-warning' : '');
+                        ?>
+                            <tr class="<?php echo $row_class; ?>">
                                 <td>
-                                    <?php 
-                                    // CORRECCIÓN: Mostrar solo username
-                                    echo htmlspecialchars($cert['admin_username'] ?? 'N/A');
-                                    ?>
+                                    <input type="checkbox" name="certificate_ids[]" value="<?php echo $cert['id']; ?>" class="certificate-checkbox" <?php echo $is_cert_deleted ? 'disabled' : ''; ?>>
                                 </td>
+                                <td>
+                                    <?php echo htmlspecialchars($cert['student_name']); ?>
+                                    <?php if ($is_student_deleted): ?>
+                                        <span class="badge bg-warning text-dark ms-2">Estudiante Desactivado</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($cert['identification']); ?></td>
+                                <td>
+                                    <?php echo htmlspecialchars($cert['course_name']); ?>
+                                    <?php if ($is_cert_deleted): ?>
+                                        <span class="badge bg-danger ms-2">Certificado Desactivado</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo date("d/m/Y", strtotime($cert['issue_date'])); ?></td>
+                                <td><?php echo htmlspecialchars($cert['admin_username'] ?? 'N/A'); ?></td>
                                 <td>
                                     <?php 
                                     $generation_date = new DateTime($cert['generation_timestamp'], new DateTimeZone('UTC'));
@@ -136,9 +185,19 @@ if (isset($_GET['message'])) {
                                 </td>
                                 <td>
                                     <a href="../<?php echo htmlspecialchars($cert['pdf_path']); ?>" class="btn btn-sm btn-info me-1" target="_blank" title="Ver PDF"><i class="fas fa-eye"></i></a>
-                                    <a href="delete_certificate.php?id=<?php echo $cert['id']; ?>" class="btn btn-sm btn-danger" title="Eliminar PDF" onclick="return confirm('¿Estás seguro de que desea eliminar este certificado? Esta acción no se puede deshacer.');">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                    <?php if ($is_cert_deleted): ?>
+                                        <?php if ($is_student_deleted): ?>
+                                            <button class="btn btn-sm btn-secondary" disabled title="Reactiva primero al estudiante para poder reactivar este certificado."><i class="fas fa-undo"></i></button>
+                                        <?php else: ?>
+                                            <a href="delete_certificate.php?action=restore&id=<?php echo $cert['id']; ?>" class="btn btn-sm btn-success" title="Reactivar Certificado" onclick="return confirm('¿Estás seguro de que deseas reactivar este certificado?');">
+                                                <i class="fas fa-undo"></i>
+                                            </a>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <a href="delete_certificate.php?id=<?php echo $cert['id']; ?>" class="btn btn-sm btn-danger" title="Desactivar Certificado" onclick="return confirm('¿Estás seguro de que desea desactivar este certificado? El registro y el PDF se conservarán.');">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; endif; ?>

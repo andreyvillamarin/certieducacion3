@@ -61,7 +61,8 @@ switch ($action) {
         // --- FIN: PROTECCIÓN CONTRA FUERZA BRUTA ---
 
         try {
-            $stmt = $pdo->prepare("SELECT id, name, phone, email FROM students WHERE identification = ?");
+            // CORRECCIÓN: No permitir login a estudiantes desactivados.
+            $stmt = $pdo->prepare("SELECT id, name, phone, email FROM students WHERE identification = ? AND deleted_at IS NULL");
             $stmt->execute([$identification]);
             $student = $stmt->fetch();
             if ($student) {
@@ -90,10 +91,11 @@ switch ($action) {
         $method = $_POST['verification_method'];
 
         try {
-            $stmt = $pdo->prepare("SELECT phone, email FROM students WHERE id = ?");
+            // CORRECCIÓN: No enviar código a estudiantes desactivados.
+            $stmt = $pdo->prepare("SELECT phone, email FROM students WHERE id = ? AND deleted_at IS NULL");
             $stmt->execute([$student_id]);
             $student = $stmt->fetch();
-            if (!$student) { send_response(['success' => false, 'message' => 'Estudiante no encontrado.']); }
+            if (!$student) { send_response(['success' => false, 'message' => 'Estudiante no encontrado o inactivo.']); }
 
             $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
             $expires_at = (new DateTime('+10 minutes'))->format('Y-m-d H:i:s');
@@ -181,6 +183,13 @@ switch ($action) {
                 send_response(['success' => false, 'message' => 'Este código de verificación ha expirado.']); 
             }
 
+            // CORRECCIÓN: Verificar que el estudiante sigue activo antes de iniciar sesión
+            $stmt_check_student = $pdo->prepare("SELECT id FROM students WHERE id = ? AND deleted_at IS NULL");
+            $stmt_check_student->execute([$student_id]);
+            if (!$stmt_check_student->fetch()) {
+                send_response(['success' => false, 'message' => 'La cuenta de este estudiante ha sido desactivada.']);
+            }
+
             // Si el código es correcto, se limpia el registro de intentos y se procede con el login.
             clear_failed_attempts($pdo, $ip_address, $identifier);
 
@@ -204,7 +213,11 @@ switch ($action) {
         if (!isset($_POST['validation_code']) || empty($_POST['validation_code'])) { send_response(['success' => false, 'message' => 'El código de validación es requerido.']); }
         $validation_code = trim($_POST['validation_code']);
         try {
-            $sql = "SELECT c.course_name, c.issue_date, s.name as student_name, s.identification as student_id FROM certificates c JOIN students s ON c.student_id = s.id WHERE c.validation_code = ?";
+            // CORRECCIÓN: Un certificado solo es válido si ni él ni el estudiante han sido eliminados.
+            $sql = "SELECT c.course_name, c.issue_date, s.name as student_name, s.identification as student_id 
+                    FROM certificates c 
+                    JOIN students s ON c.student_id = s.id 
+                    WHERE c.validation_code = ? AND c.deleted_at IS NULL AND s.deleted_at IS NULL";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$validation_code]);
             $certificate = $stmt->fetch(PDO::FETCH_ASSOC);

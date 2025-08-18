@@ -28,8 +28,8 @@ try {
     }
     $student_name = htmlspecialchars($student['name']);
 
-    // 3. Obtener la lista de certificados del estudiante
-    $stmt = $pdo->prepare("SELECT course_name, issue_date, pdf_path FROM certificates WHERE student_id = ? ORDER BY issue_date DESC");
+    // 3. Obtener la lista de certificados ACTIVOS del estudiante
+    $stmt = $pdo->prepare("SELECT course_name, issue_date, pdf_path FROM certificates WHERE student_id = ? AND deleted_at IS NULL ORDER BY issue_date DESC");
     $stmt->execute([$student_id]);
     $certificates = $stmt->fetchAll();
 

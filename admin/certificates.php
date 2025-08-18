@@ -10,8 +10,8 @@ include 'includes/header.php';
 //    require_once ROOT_PATH . '/includes/database.php'; 
 // }
 
-// Obtener la lista de todos los estudiantes para el selector
-$stmt_students = $pdo->query("SELECT id, name, identification FROM students ORDER BY name ASC");
+// Obtener la lista de estudiantes ACTIVOS para el selector
+$stmt_students = $pdo->query("SELECT id, name, identification FROM students WHERE deleted_at IS NULL ORDER BY name ASC");
 $all_students = $stmt_students->fetchAll();
 
 $notification = '';

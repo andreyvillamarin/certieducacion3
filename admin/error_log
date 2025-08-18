@@ -316,3 +316,69 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/verify_2fa.php on line 41
+[17-Aug-2025 16:41:15 America/Bogota] PHP Warning:  require_once(/home/qdosnetw/public_html/demos/certieducacion3/admin/includes/database.php): Failed to open stream: No such file or directory in /home/qdosnetw/certieducacion3_secure_configs/main_config.php on line 12
+[17-Aug-2025 16:41:15 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required '/home/qdosnetw/public_html/demos/certieducacion3/admin/includes/database.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/qdosnetw/certieducacion3_secure_configs/main_config.php:12
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/config.php(14): require_once()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/includes/header.php(5): require_once('/home/qdosnetw/...')
+#2 /home/qdosnetw/public_html/demos/certieducacion3/admin/delete_certificate.php(6): include('/home/qdosnetw/...')
+#3 {main}
+  thrown in /home/qdosnetw/certieducacion3_secure_configs/main_config.php on line 12
+[17-Aug-2025 16:44:21 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:57
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(57): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 57
+[17-Aug-2025 16:44:30 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:57
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(57): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 57
+[17-Aug-2025 16:44:49 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:57
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(57): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 57
+[17-Aug-2025 16:47:52 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:52
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(52): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 52
+[17-Aug-2025 16:48:01 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:52
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(52): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 52
+[17-Aug-2025 16:48:19 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:52
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(52): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 52
+[17-Aug-2025 16:53:36 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:71
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(71): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 71
+[17-Aug-2025 16:53:52 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:71
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(71): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 71
+[17-Aug-2025 16:53:57 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:71
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(71): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 71
+[17-Aug-2025 16:54:10 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php:71
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php(71): PDOStatement->execute()
+#1 {main}
+  thrown in /home/qdosnetw/public_html/demos/certieducacion3/admin/history.php on line 71
+[17-Aug-2025 18:59:48 America/Bogota] PHP Warning:  require_once(/home/qdosnetw/public_html/demos/certieducacion3/admin/includes/database.php): Failed to open stream: No such file or directory in /home/qdosnetw/certieducacion3_secure_configs/main_config.php on line 12
+[17-Aug-2025 18:59:48 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required '/home/qdosnetw/public_html/demos/certieducacion3/admin/includes/database.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/qdosnetw/certieducacion3_secure_configs/main_config.php:12
+Stack trace:
+#0 /home/qdosnetw/public_html/demos/certieducacion3/config.php(14): require_once()
+#1 /home/qdosnetw/public_html/demos/certieducacion3/admin/includes/header.php(5): require_once('/home/qdosnetw/...')
+#2 /home/qdosnetw/public_html/demos/certieducacion3/admin/delete_certificate.php(6): include('/home/qdosnetw/...')
+#3 {main}
+  thrown in /home/qdosnetw/certieducacion3_secure_configs/main_config.php on line 12

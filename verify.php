@@ -34,6 +34,7 @@ $student_id = filter_var($_GET['student_id'], FILTER_SANITIZE_NUMBER_INT);
             <div class="card-body">
                 <form id="form-verify-code">
                     <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($student_id); ?>">
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                     <div class="mb-3">
                         <label for="verification_code" class="form-label">Código de Verificación</label>
                         <input type="text" class="form-control text-center" id="verification_code" name="verification_code" 

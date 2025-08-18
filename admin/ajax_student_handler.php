@@ -88,26 +88,42 @@ switch ($action) {
         }
 
         try {
-            $stmt_check_duplicate = $pdo->prepare("SELECT id FROM students WHERE identification = ?");
-            $stmt_check_duplicate->execute([$id_num]);
-            if ($stmt_check_duplicate->fetch()) {
-                send_response(false, 'La identificación ingresada ya pertenece a otro estudiante.');
+            // Verificar si el estudiante ya existe (activo o inactivo)
+            $stmt_check = $pdo->prepare("SELECT id, deleted_at FROM students WHERE identification = ?");
+            $stmt_check->execute([$id_num]);
+            $existing_student = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+            if ($existing_student) {
+                // Si existe y está inactivo (borrado suave), reactivarlo y actualizar sus datos
+                if ($existing_student['deleted_at'] !== null) {
+                    $sql_reactivate = "UPDATE students SET name = ?, phone = ?, email = ?, deleted_at = NULL WHERE id = ?";
+                    $params_reactivate = [$name, $phone, $email, $existing_student['id']];
+                    $stmt_reactivate = $pdo->prepare($sql_reactivate);
+                    $stmt_reactivate->execute($params_reactivate);
+
+                    if (function_exists('log_activity')) {
+                        $log_details = "Estudiante reactivado y actualizado: Nombre: {$name}, ID: {$id_num}.";
+                        log_activity($pdo, $current_admin_id, 'estudiante_reactivado', $existing_student['id'], 'students', $log_details);
+                    }
+                    send_response(true, 'Un estudiante inactivo con esta identificación ha sido reactivado y actualizado.');
+                } else {
+                    // Si existe y está activo, es un duplicado
+                    send_response(false, 'La identificación ingresada ya pertenece a otro estudiante activo.');
+                }
+            } else {
+                // Si no existe, crear un nuevo estudiante
+                $sql_insert = "INSERT INTO students (name, identification, phone, email) VALUES (?, ?, ?, ?)";
+                $params_insert = [$name, $id_num, $phone, $email];
+                $stmt_insert = $pdo->prepare($sql_insert);
+                $stmt_insert->execute($params_insert);
+                $new_student_id = $pdo->lastInsertId();
+
+                if (function_exists('log_activity')) {
+                    $log_details = "Estudiante agregado: Nombre: {$name}, ID: {$id_num}.";
+                    log_activity($pdo, $current_admin_id, 'estudiante_creado', $new_student_id, 'students', $log_details);
+                }
+                send_response(true, 'Estudiante agregado con éxito.', ['id' => $new_student_id, 'name' => $name, 'identification' => $id_num, 'phone' => $phone, 'email' => $email]);
             }
-
-            $sql = "INSERT INTO students (name, identification, phone, email) VALUES (?, ?, ?, ?)";
-            $params = [$name, $id_num, $phone, $email];
-            $stmt_action = $pdo->prepare($sql);
-            $stmt_action->execute($params);
-            $new_student_id = $pdo->lastInsertId();
-
-            // Registrar actividad
-            if (function_exists('log_activity')) {
-                $log_details = "Estudiante agregado: Nombre: {$name}, ID: {$id_num}.";
-                log_activity($pdo, $current_admin_id, 'estudiante_creado', $new_student_id, 'students', $log_details);
-            }
-
-            send_response(true, 'Estudiante agregado con éxito.', ['id' => $new_student_id, 'name' => $name, 'identification' => $id_num, 'phone' => $phone, 'email' => $email]);
-
         } catch (PDOException $e) {
             error_log("Error en add_student (student): " . $e->getMessage());
             send_response(false, 'Error de base de datos al agregar estudiante.');
@@ -191,61 +207,177 @@ switch ($action) {
         break;
     
     case 'upload_csv':
-        if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] == 0) {
-            $file = $_FILES['csv_file']['tmp_name'];
-            if (($handle = fopen($file, "r")) !== FALSE) {
-                // Validar cabeceras
-                $header = fgetcsv($handle, 1000, ",");
-                if ($header !== ['nombre', 'identificacion', 'telefono', 'email']) {
-                    fclose($handle);
-                    send_response(false, 'Las cabeceras del CSV son incorrectas. Deben ser: nombre,identificacion,telefono,email');
-                }
+        if (!isset($_FILES['csv_file']) || $_FILES['csv_file']['error'] != 0) {
+            send_response(false, 'Error al subir el archivo o archivo no seleccionado.');
+        }
 
-                $added = 0;
-                $skipped = 0;
-                $pdo->beginTransaction();
-                try {
-                    $stmt_check = $pdo->prepare("SELECT id FROM students WHERE identification = ?");
-                    $stmt_insert = $pdo->prepare("INSERT INTO students (name, identification, phone, email) VALUES (?, ?, ?, ?)");
+        $file_handle = fopen($_FILES['csv_file']['tmp_name'], "r");
+        if ($file_handle === FALSE) {
+            send_response(false, 'No se pudo abrir el archivo CSV.');
+        }
 
-                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                        if (count($data) !== 4) { $skipped++; continue; }
-                        
-                        $csv_name = trim($data[0]);
-                        $csv_identification = trim($data[1]);
-                        $csv_phone = trim($data[2]);
-                        $csv_email = trim($data[3]);
+        $header = fgetcsv($file_handle);
+        if ($header !== ['nombre', 'identificacion', 'telefono', 'email']) {
+            fclose($file_handle);
+            send_response(false, 'Las cabeceras del CSV son incorrectas. Deben ser: nombre,identificacion,telefono,email');
+        }
 
-                        if (empty($csv_identification)) { $skipped++; continue; }
-                        
-                        $stmt_check->execute([$csv_identification]);
-                        if ($stmt_check->fetch()) { $skipped++; continue; }
+        $added = 0;
+        $skipped = 0;
+        $reactivated = 0;
+        
+        $pdo->beginTransaction();
+        try {
+            $stmt_check = $pdo->prepare("SELECT id, deleted_at FROM students WHERE identification = ?");
+            $stmt_insert = $pdo->prepare("INSERT INTO students (name, identification, phone, email) VALUES (?, ?, ?, ?)");
+            $stmt_reactivate = $pdo->prepare("UPDATE students SET name = ?, phone = ?, email = ?, deleted_at = NULL WHERE id = ?");
 
-                        $stmt_insert->execute([$csv_name, $csv_identification, $csv_phone, $csv_email]);
-                        $newly_added_student_id = $pdo->lastInsertId();
-                        $added++;
+            while (($data = fgetcsv($file_handle)) !== FALSE) {
+                if (count($data) !== 4) { continue; } // Ignorar filas malformadas
 
-                        // Registrar actividad para cada estudiante agregado por CSV
+                $csv_name = trim($data[0]);
+                $csv_id = trim($data[1]);
+                $csv_phone = trim($data[2]);
+                $csv_email = trim($data[3]);
+
+                if (empty($csv_id)) { continue; }
+
+                $stmt_check->execute([$csv_id]);
+                $existing_student = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+                if ($existing_student) {
+                    if ($existing_student['deleted_at'] !== null) {
+                        // Reactivar y actualizar
+                        $stmt_reactivate->execute([$csv_name, $csv_phone, $csv_email, $existing_student['id']]);
+                        $reactivated++;
                         if (function_exists('log_activity')) {
-                            $log_details_csv = "Estudiante agregado vía CSV: Nombre: {$csv_name}, ID: {$csv_identification}.";
-                            log_activity($pdo, $current_admin_id, 'estudiante_creado_csv', $newly_added_student_id, 'students', $log_details_csv);
+                            $log_details = "Estudiante reactivado y actualizado vía CSV: Nombre: {$csv_name}, ID: {$csv_id}.";
+                            log_activity($pdo, $current_admin_id, 'estudiante_reactivado_csv', $existing_student['id'], 'students', $log_details);
+                        }
+                    } else {
+                        // Omitir duplicado activo
+                        $skipped++;
+                    }
+                } else {
+                    // Agregar nuevo
+                    $stmt_insert->execute([$csv_name, $csv_id, $csv_phone, $csv_email]);
+                    $new_id = $pdo->lastInsertId();
+                    $added++;
+                    if (function_exists('log_activity')) {
+                        $log_details = "Estudiante agregado vía CSV: Nombre: {$csv_name}, ID: {$csv_id}.";
+                        log_activity($pdo, $current_admin_id, 'estudiante_creado_csv', $new_id, 'students', $log_details);
+                    }
+                }
+            }
+            $pdo->commit();
+            fclose($file_handle);
+            
+            $message = "Proceso completado. Agregados: $added. Reactivados: $reactivated. Omitidos (duplicados activos): $skipped.";
+            send_response(true, $message);
+
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            fclose($file_handle);
+            error_log("Error en carga CSV de estudiantes: " . $e->getMessage());
+            send_response(false, 'Ocurrió un error durante la carga masiva.');
+        }
+        break;
+
+    case 'process_csv_for_certificates':
+        if (!isset($_FILES['csv_file']) || $_FILES['csv_file']['error'] != 0) {
+            send_response(false, 'Error al subir el archivo o archivo no seleccionado.');
+        }
+
+        $file_path = $_FILES['csv_file']['tmp_name'];
+        $file_handle = fopen($file_path, "r");
+
+        if ($file_handle === false) {
+            send_response(false, 'No se pudo abrir el archivo CSV.');
+        }
+
+        // Leer cabeceras y encontrar el índice de 'identificacion'
+        $header = fgetcsv($file_handle);
+        $id_column_index = array_search('identificacion', $header);
+
+        if ($id_column_index === false) {
+            fclose($file_handle);
+            send_response(false, 'El archivo CSV debe contener una columna con la cabecera "identificacion".');
+        }
+
+        $ids_from_csv = [];
+        while (($data = fgetcsv($file_handle)) !== false) {
+            if (isset($data[$id_column_index]) && !empty(trim($data[$id_column_index]))) {
+                $ids_from_csv[] = trim($data[$id_column_index]);
+            }
+        }
+        fclose($file_handle);
+
+        if (empty($ids_from_csv)) {
+            send_response(false, 'No se encontraron identificaciones válidas en el archivo CSV.');
+        }
+
+        try {
+            $pdo->beginTransaction();
+
+            // 1. Buscar todos los estudiantes (activos e inactivos) que coincidan con las IDs del CSV
+            $placeholders = implode(',', array_fill(0, count($ids_from_csv), '?'));
+            $sql_select = "SELECT id, name, identification, deleted_at FROM students WHERE identification IN ($placeholders)";
+            $stmt_select = $pdo->prepare($sql_select);
+            $stmt_select->execute($ids_from_csv);
+            $all_found_students = $stmt_select->fetchAll(PDO::FETCH_ASSOC);
+
+            $students_to_reactivate_ids = [];
+            foreach ($all_found_students as $student) {
+                if ($student['deleted_at'] !== null) {
+                    $students_to_reactivate_ids[] = $student['id'];
+                }
+            }
+
+            // 2. Reactivar los estudiantes que estaban inactivos
+            $reactivated_count = 0;
+            if (!empty($students_to_reactivate_ids)) {
+                $placeholders_reactivate = implode(',', array_fill(0, count($students_to_reactivate_ids), '?'));
+                $sql_reactivate = "UPDATE students SET deleted_at = NULL WHERE id IN ($placeholders_reactivate)";
+                $stmt_reactivate = $pdo->prepare($sql_reactivate);
+                $stmt_reactivate->execute($students_to_reactivate_ids);
+                $reactivated_count = $stmt_reactivate->rowCount();
+
+                // 3. Registrar la actividad para cada estudiante reactivado
+                if (function_exists('log_activity')) {
+                    foreach ($all_found_students as $student) {
+                        if (in_array($student['id'], $students_to_reactivate_ids)) {
+                            $log_details = "Estudiante reactivado automáticamente vía CSV: Nombre: {$student['name']}, ID: {$student['identification']}.";
+                            log_activity($pdo, $current_admin_id, 'estudiante_reactivado_csv', $student['id'], 'students', $log_details);
                         }
                     }
-                    $pdo->commit();
-                    fclose($handle);
-                    send_response(true, "Proceso completado. Estudiantes agregados: $added. Duplicados/omitidos o con errores: $skipped.");
-                } catch (Exception $e) {
-                    $pdo->rollBack();
-                    fclose($handle);
-                    error_log("Error en carga CSV: " . $e->getMessage());
-                    send_response(false, 'Ocurrió un error durante la carga masiva.');
                 }
-            } else {
-                 send_response(false, 'No se pudo abrir el archivo CSV subido.');
             }
-        } else {
-            $upload_error = $_FILES['csv_file']['error'] ?? 'No file';
-            send_response(false, 'Error al subir el archivo (código: '.$upload_error.') o archivo no seleccionado.');
+
+            $pdo->commit();
+
+            // 3. Preparar la respuesta
+            $found_ids = array_column($all_found_students, 'identification');
+            $not_found_ids = array_diff($ids_from_csv, $found_ids);
+
+            $message = count($all_found_students) . " estudiante(s) encontrado(s) y añadido(s) a la selección.";
+            if ($reactivated_count > 0) {
+                $message .= " Se reactivaron automáticamente {$reactivated_count} estudiante(s).";
+            }
+            if (!empty($not_found_ids)) {
+                $message .= " " . count($not_found_ids) . " identificacion(es) no fueron encontradas.";
+            }
+
+            send_response(true, $message, [
+                'students_to_select' => $all_found_students,
+                'errors' => array_map(function($id) { return "Identificación no encontrada: $id"; }, array_values($not_found_ids))
+            ]);
+
+        } catch (PDOException $e) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            error_log("Error en process_csv_for_certificates: " . $e->getMessage());
+            send_response(false, 'Error de base de datos al procesar el CSV.');
         }
         break;
 
