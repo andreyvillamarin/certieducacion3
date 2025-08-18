@@ -32,6 +32,9 @@ $admin_role = $_SESSION['admin_role'];
                 <a href="dashboard.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                 <a href="students.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-graduate me-2"></i>Estudiantes</a>
                 <a href="certificates.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-certificate me-2"></i>Certificados</a>
+                <?php if ($admin_role === 'superadmin'): ?>
+                <a href="certificate_designer.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-paint-brush me-2"></i>Diseñar Plantilla</a>
+                <?php endif; ?>
                 <a href="history.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-history me-2"></i>Historial</a>
                 <?php if ($admin_role === 'superadmin'): ?>
                 <a href="administrators.php" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-users-cog me-2"></i>Administradores</a>
