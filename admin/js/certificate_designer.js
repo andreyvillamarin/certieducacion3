@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const designerDataElement = document.getElementById('designer-data');
     if (!designerDataElement) {
-        console.error('Elemento de datos del diseñador no encontrado.');
+        console.error('Elemento de datos del dise�0�9ador no encontrado.');
         return;
     }
 
@@ -10,17 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const basePath = designerDataElement.dataset.basePath;
     const signaturePath = basePath + designerDataElement.dataset.signaturePath;
 
-    const canvasContainer = document.getElementById('canvas-container');
-    const a4_aspect_ratio = 297 / 210; // L / H
-    const initialWidth = canvasContainer.clientWidth;
-    const initialHeight = initialWidth / a4_aspect_ratio;
+    const A4_WIDTH = 842;
+    const A4_HEIGHT = 595;
 
     const canvas = new fabric.Canvas('certificate-canvas', {
-        width: initialWidth,
-        height: initialHeight,
+        width: A4_WIDTH,
+        height: A4_HEIGHT,
         backgroundColor: '#f0f0f0',
         preserveObjectStacking: true
     });
+
+    const canvasContainer = document.getElementById('canvas-container');
 
     function loadTemplate(templateData) {
         const data = JSON.parse(JSON.stringify(templateData));
@@ -50,30 +50,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 const backgroundUrl = basePath + backgroundData.src;
                 fabric.Image.fromURL(backgroundUrl, function(bgImg) {
                     canvas.setBackgroundImage(bgImg, canvas.renderAll.bind(canvas), {
+                        scaleX: A4_WIDTH / bgImg.width,
+                        scaleY: A4_HEIGHT / bgImg.height,
                         originX: 'left',
                         originY: 'top',
                         crossOrigin: 'anonymous'
                     });
                 }, { crossOrigin: 'anonymous' });
             } else {
-                canvas.renderAll();
+                canvas.setBackgroundImage(null, canvas.renderAll.bind(canvas));
             }
         });
     }
 
     function resizeCanvas() {
         const containerWidth = canvasContainer.clientWidth;
-        const bgImage = canvas.backgroundImage;
-        let scale;
-        if (bgImage && bgImage.width > 0) {
-            scale = containerWidth / bgImage.width;
-            canvas.setDimensions({ width: containerWidth, height: bgImage.height * scale });
-        } else {
-            scale = containerWidth / 842; // Default A4 width in points
-            canvas.setDimensions({ width: containerWidth, height: containerWidth / a4_aspect_ratio });
-        }
+        const scale = containerWidth / A4_WIDTH;
+        
+        canvas.setDimensions({
+            width: containerWidth,
+            height: A4_HEIGHT * scale
+        });
         canvas.setZoom(scale);
         canvas.renderAll();
+        canvas.calcOffset();
     }
     
     loadTemplate(Object.keys(savedTemplate).length > 1 ? savedTemplate : defaultTemplate);
@@ -166,9 +166,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const reader = new FileReader();
         reader.onload = function(f) {
             fabric.Image.fromURL(f.target.result, function(img) {
-                img.set({ crossOrigin: 'anonymous' });
-                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), { originX: 'left', originY: 'top' });
-                resizeCanvas();
+                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                    scaleX: A4_WIDTH / img.width,
+                    scaleY: A4_HEIGHT / img.height,
+                    originX: 'left',
+                    originY: 'top',
+                    crossOrigin: 'anonymous'
+                });
+                resizeCanvas(); // Re-center/zoom the canvas after new bg
             });
         };
         reader.readAsDataURL(file);
@@ -184,10 +189,17 @@ document.addEventListener('DOMContentLoaded', function() {
             jsonOutput.objects.push(obj.toObject(['data']));
         });
         if (canvas.backgroundImage) {
-            if (canvas.backgroundImage.getSrc().startsWith('data:')) {
-                jsonOutput.backgroundImage = { type: 'image', src: '' }; 
+            const bgSrc = canvas.backgroundImage.getSrc();
+            if (bgSrc.startsWith('data:')) {
+                jsonOutput.backgroundImage = { type: 'image', src: '' };
             } else {
-                jsonOutput.backgroundImage = canvas.backgroundImage.toObject(['data']);
+                const templateObject = canvas.backgroundImage.toObject(['data']);
+                const assetsPath = 'assets/img/';
+                const indexOfAssets = bgSrc.indexOf(assetsPath);
+                if (indexOfAssets > -1) {
+                    templateObject.src = bgSrc.substring(indexOfAssets);
+                }
+                jsonOutput.backgroundImage = templateObject;
             }
         }
         
@@ -203,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                alert('¡Plantilla guardada con éxito!');
+                alert('�0�3Plantilla guardada con ��xito!');
                 if (data.new_template_json) { 
                     designerDataElement.dataset.template = JSON.stringify(data.new_template_json);
                     loadTemplate(data.new_template_json);
@@ -214,13 +226,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error de conexión.');
+            alert('Error de conexi��n.');
         })
         .finally(() => { button.disabled = false; });
     });
 
     document.getElementById('reset-template').addEventListener('click', function() {
-        if (confirm('¿Restaurar la plantilla original? Perderás los cambios no guardados.')) {
+        if (confirm('�0�7Restaurar la plantilla original? Perder��s los cambios no guardados.')) {
             loadTemplate(defaultTemplate);
             alert('Plantilla restaurada. Haz clic en "Guardar Cambios" para confirmar.');
         }

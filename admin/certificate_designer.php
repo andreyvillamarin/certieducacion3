@@ -30,7 +30,7 @@ $default_template_json = file_get_contents('certificate_template.json');
                 
                 <div id="object-controls" class="mt-4" style="display: none;">
                     <hr>
-                    <h5>Alineaci贸n de Objeto</h5>
+                    <h5>Alineación de Objeto</h5>
                     <div class="d-grid gap-2">
                         <button id="object-align-center-h" class="btn btn-outline-primary btn-sm">Centrar Horizontalmente</button>
                         <button id="object-align-center-v" class="btn btn-outline-primary btn-sm">Centrar Verticalmente</button>
@@ -41,7 +41,7 @@ $default_template_json = file_get_contents('certificate_template.json');
                     <hr>
                     <h5>Estilos de Texto</h5>
                     <div class="mb-2"><label for="font-family" class="form-label">Fuente</label><select id="font-family" class="form-select form-select-sm"><option>Arial</option><option>Helvetica</option><option>Times New Roman</option><option>Courier</option><option>Verdana</option></select></div>
-                    <div class="mb-2"><label for="font-size" class="form-label">Tama帽o (pt)</label><input type="number" id="font-size" class="form-control form-control-sm" min="1"></div>
+                    <div class="mb-2"><label for="font-size" class="form-label">Tamaño (pt)</label><input type="number" id="font-size" class="form-control form-control-sm" min="1"></div>
                     <div class="mb-2"><label for="font-color" class="form-label">Color</label><input type="color" id="font-color" class="form-control form-control-color w-100"></div>
                     <div class="d-flex justify-content-start gap-2 flex-wrap">
                         <button id="font-bold" class="btn btn-outline-secondary btn-sm"><i class="fas fa-bold"></i></button>

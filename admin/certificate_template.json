@@ -14,7 +14,7 @@
             "fontFamily": "helvetica",
             "fontWeight": "bold",
             "fontSize": 9,
-            "text": "APROBADO POR LA SECRETARÍA DE EDUCACIÓN MUNICIPAL\nRESOLUCIÓN DE RENOVACIÓN 0153 DE 2012",
+            "text": "APROBADO POR LA SECRETARÍA DE EDUCACIÓN MUNICIPAL\\nRESOLUCIÓN DE RENOVACIÓN 0153 DE 2012",
             "textAlign": "center",
             "data": { "isDynamic": false }
         },
@@ -184,7 +184,7 @@
             "fontWeight": "bold",
             "fontSize": 8,
             "textAlign": "center",
-            "text": "{{director_name}}\nJEFE DE DIVISIÓN SERVICIOS EDUCATIVOS",
+            "text": "{{director_name}}\\nJEFE DE DIVISIÓN SERVICIOS EDUCATIVOS",
             "data": { "isDynamic": true, "field": "director_name" }
         }
     ],

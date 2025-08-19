@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 if (session_status() == PHP_SESSION_NONE) { session_start(); }
 if (!isset($_SESSION['admin_id'])) { exit(json_encode(['success' => false, 'message' => 'Acceso no autorizado.'])); }
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { exit(json_encode(['success' => false, 'message' => 'Método no permitido.'])); }
@@ -31,9 +32,11 @@ if (isset($_FILES['background_image'])) {
         if ($ext === false) { throw new RuntimeException('Formato de fondo no válido.'); }
         $new_filename = 'certificate_background_' . time() . '.' . $ext;
         if (!move_uploaded_file($file['tmp_name'], $backgrounds_dir . $new_filename)) { throw new RuntimeException('No se pudo mover el fondo.'); }
-        if (isset($template_data['backgroundImage'])) {
-            $template_data['backgroundImage']['src'] = 'assets/img/' . $new_filename;
+        if (!isset($template_data['backgroundImage']) || !is_array($template_data['backgroundImage'])) {
+            $template_data['backgroundImage'] = [];
         }
+        $template_data['backgroundImage']['src'] = 'assets/img/' . $new_filename;
+        $template_data['backgroundImage']['type'] = 'image';
     } catch (RuntimeException $e) { exit(json_encode(['success' => false, 'message' => $e->getMessage()])); }
 }
 
