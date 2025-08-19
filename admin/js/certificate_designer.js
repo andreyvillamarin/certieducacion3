@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const designerDataElement = document.getElementById('designer-data');
     if (!designerDataElement) {
-        console.error('Elemento de datos del dise�0�9ador no encontrado.');
+        console.error('Elemento de datos del dise�1�70�1�79ador no encontrado.');
         return;
     }
 
@@ -152,12 +152,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     objectAlignCenterH.addEventListener('click', () => {
         const activeObject = canvas.getActiveObject();
-        if (activeObject) { activeObject.centerH(); canvas.renderAll(); }
+        if (activeObject) { activeObject.viewportCenterH(); canvas.renderAll(); }
     });
 
     objectAlignCenterV.addEventListener('click', () => {
         const activeObject = canvas.getActiveObject();
-        if (activeObject) { activeObject.centerV(); canvas.renderAll(); }
+        if (activeObject) { activeObject.viewportCenterV(); canvas.renderAll(); }
     });
 
     document.getElementById('background-uploader').addEventListener('change', function(e) {
@@ -186,7 +186,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const jsonOutput = { version: '5.3.1', objects: [] };
         canvas.getObjects().forEach(obj => {
+            let wasModified = false;
+            const originalStyles = obj.styles;
+
+            // Workaround for fabric.js bug:
+            // Normalize styles on text objects before serialization.
+            // The bug occurs if .styles is undefined or an empty object.
+            if (obj.isType && (obj.isType('textbox') || obj.isType('i-text'))) {
+                if (!obj.styles || Object.keys(obj.styles).length === 0) {
+                    obj.styles = {};
+                    wasModified = true;
+                }
+            }
+            
             jsonOutput.objects.push(obj.toObject(['data']));
+
+            // Restore the object to its original state if it was modified.
+            if (wasModified) {
+                obj.styles = originalStyles;
+            }
         });
         if (canvas.backgroundImage) {
             const bgSrc = canvas.backgroundImage.getSrc();
@@ -215,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                alert('�0�3Plantilla guardada con ��xito!');
+                alert('�1�70�1�73Plantilla guardada con �1�7�1�7xito!');
                 if (data.new_template_json) { 
                     designerDataElement.dataset.template = JSON.stringify(data.new_template_json);
                     loadTemplate(data.new_template_json);
@@ -226,13 +244,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error de conexi��n.');
+            alert('Error de conexi�1�7�1�7n.');
         })
         .finally(() => { button.disabled = false; });
     });
 
     document.getElementById('reset-template').addEventListener('click', function() {
-        if (confirm('�0�7Restaurar la plantilla original? Perder��s los cambios no guardados.')) {
+        if (confirm('�1�70�1�77Restaurar la plantilla original? Perder�1�7�1�7s los cambios no guardados.')) {
             loadTemplate(defaultTemplate);
             alert('Plantilla restaurada. Haz clic en "Guardar Cambios" para confirmar.');
         }

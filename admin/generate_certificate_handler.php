@@ -102,7 +102,7 @@ foreach ($student_ids as $student_id) {
 
         // Conversión de puntos (Fabric.js) a mm (TCPDF)
         $pt_to_mm = 25.4 / 72;
-        $canvas_width_pt = $template_data['backgroundImage']['width'] ?? 842;
+        $canvas_width_pt = 842; // The design canvas is always 842pt wide.
         $a4_width_mm = 297;
         $scale_factor = $a4_width_mm / $canvas_width_pt;
 
@@ -137,7 +137,17 @@ foreach ($student_ids as $student_id) {
                     $pdf->Image($image_path, $x_mm, $y_mm, $width_mm, $height_mm, 'PNG', '', 'T', false, 300, '', false, false, 0);
                 }
             } elseif (isset($obj['type']) && $obj['type'] === 'textbox') {
-                $font_family = strtolower($obj['fontFamily'] ?? 'helvetica');
+                $font_map = [
+                    'arial' => 'arial',
+                    'helvetica' => 'helvetica',
+                    'times new roman' => 'times',
+                    'courier' => 'courier',
+                    'verdana' => 'helvetica' // Fallback for Verdana
+                ];
+
+                $font_family_from_json = strtolower($obj['fontFamily'] ?? 'helvetica');
+                $font_family = $font_map[$font_family_from_json] ?? 'helvetica';
+                
                 $font_style = '';
                 if (isset($obj['fontWeight']) && ($obj['fontWeight'] === 'bold' || $obj['fontWeight'] === 700)) $font_style .= 'B';
                 if (isset($obj['fontStyle']) && $obj['fontStyle'] === 'italic') $font_style .= 'I';
