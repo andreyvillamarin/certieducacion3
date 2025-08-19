@@ -123,6 +123,14 @@ foreach ($student_ids as $student_id) {
             $y_mm = ($obj['top'] ?? 0) * $scale_factor;
             $width_mm = ($obj['width'] ?? 0) * ($obj['scaleX'] ?? 1) * $scale_factor;
             $height_mm = ($obj['height'] ?? 0) * ($obj['scaleY'] ?? 1) * $scale_factor;
+
+            // Ajuste para la alineación del texto y origen del objeto
+            if (isset($obj['originX']) && $obj['originX'] === 'center') {
+                $x_mm -= $width_mm / 2;
+            }
+            if (isset($obj['originY']) && $obj['originY'] === 'center') {
+                $y_mm -= $height_mm / 2;
+            }
             
             if (isset($obj['data']['isImagePlaceholder'])) {
                 $field = $obj['data']['field'];
@@ -162,14 +170,56 @@ foreach ($student_ids as $student_id) {
 
                 $text = $obj['text'] ?? '';
                 if (isset($obj['data']['isDynamic']) && $obj['data']['isDynamic']) {
-                    $field_placeholder = '{{' . $obj['data']['field'] . '}}';
-                    // Reemplazar solo el placeholder, manteniendo el resto del texto
-                    $text = str_replace($field_placeholder, $replacements[$field_placeholder] ?? '', $text);
+                    // Iterar sobre todos los reemplazos posibles para este campo de texto
+                    foreach ($replacements as $placeholder => $value) {
+                        $text = str_ireplace($placeholder, $value, $text);
+                    }
+                }
+
+                if (isset($obj['data']['isUppercase']) && $obj['data']['isUppercase']) {
+                    $text = strtoupper($text);
                 }
                 
                 $pdf->SetXY($x_mm, $y_mm);
                 $align = strtoupper(substr($obj['textAlign'] ?? 'L', 0, 1));
                 $pdf->MultiCell($width_mm, $height_mm, $text, 0, $align, false, 1, '', '', true, 0, false, true, 0, 'T', false);
+            } elseif (isset($obj['type']) && $obj['type'] === 'line') {
+                $scaleX = $obj['scaleX'] ?? 1;
+                $scaleY = $obj['scaleY'] ?? 1;
+                
+                // A horizontal line is defined by its center (left, top) and its width.
+                // FabricJS line x1, x2 are relative to the center.
+                $x1_pt = $obj['left'] + ($obj['x1'] ?? -$obj['width']/2) * $scaleX;
+                $y1_pt = $obj['top'] + ($obj['y1'] ?? 0) * $scaleY;
+                $x2_pt = $obj['left'] + ($obj['x2'] ?? $obj['width']/2) * $scaleX;
+                $y2_pt = $obj['top'] + ($obj['y2'] ?? 0) * $scaleY;
+
+                // Convert to mm
+                $x1_mm = $x1_pt * $scale_factor;
+                $y1_mm = $y1_pt * $scale_factor;
+                $x2_mm = $x2_pt * $scale_factor;
+                $y2_mm = $y2_pt * $scale_factor;
+                
+                // Set line style
+                $line_style = [];
+                if (isset($obj['strokeWidth'])) {
+                    $line_style['width'] = $obj['strokeWidth'] * $pt_to_mm; // Use pt to mm for stroke
+                }
+                if (isset($obj['stroke'])) {
+                    $hex = ltrim($obj['stroke'], '#');
+                    if (strlen($hex) == 3) {
+                        $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
+                        $g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
+                        $b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
+                    } else {
+                        $r = hexdec(substr($hex, 0, 2));
+                        $g = hexdec(substr($hex, 2, 2));
+                        $b = hexdec(substr($hex, 4, 2));
+                    }
+                    $line_style['color'] = [$r, $g, $b];
+                }
+                
+                $pdf->Line($x1_mm, $y1_mm, $x2_mm, $y2_mm, $line_style);
             }
         }
 

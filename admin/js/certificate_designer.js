@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const designerDataElement = document.getElementById('designer-data');
     if (!designerDataElement) {
-        console.error('Elemento de datos del dise�1�70�1�79ador no encontrado.');
+        console.error('Elemento de datos del diseñador no encontrado.');
         return;
     }
 
@@ -32,11 +32,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const signaturePlaceholder = canvas.getObjects().find(obj => obj.data && obj.data.field === 'signature');
             if (signaturePlaceholder) {
                 fabric.Image.fromURL(signaturePath, function(sigImg) {
+                    const placeholderWidth = signaturePlaceholder.getScaledWidth();
+                    const placeholderHeight = signaturePlaceholder.getScaledHeight();
+                    
+                    const scaleX = placeholderWidth / sigImg.width;
+                    const scaleY = placeholderHeight / sigImg.height;
+                    const scale = Math.min(scaleX, scaleY);
+
+                    sigImg.scale(scale);
+
+                    const newLeft = signaturePlaceholder.left + (placeholderWidth - sigImg.getScaledWidth()) / 2;
+                    const newTop = signaturePlaceholder.top + (placeholderHeight - sigImg.getScaledHeight()) / 2;
+
                     sigImg.set({
-                        left: signaturePlaceholder.left,
-                        top: signaturePlaceholder.top,
-                        width: signaturePlaceholder.getScaledWidth(),
-                        height: signaturePlaceholder.getScaledHeight(),
+                        left: newLeft,
+                        top: newTop,
                         data: signaturePlaceholder.data,
                         crossOrigin: 'anonymous'
                     });
@@ -95,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const alignmentButtons = [alignLeft, alignCenter, alignRight, alignJustify];
     const objectAlignCenterH = document.getElementById('object-align-center-h');
     const objectAlignCenterV = document.getElementById('object-align-center-v');
+    const fontUppercase = document.getElementById('font-uppercase');
 
     function updateControls(target) {
         if (target) {
@@ -111,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fontBold.classList.toggle('active', target.get('fontWeight') === 'bold');
             fontItalic.classList.toggle('active', target.get('fontStyle') === 'italic');
             fontUnderline.classList.toggle('active', target.get('underline') === true);
+            fontUppercase.classList.toggle('active', target.data && target.data.isUppercase);
             
             const currentAlign = target.get('textAlign') || 'left';
             alignmentButtons.forEach(btn => {
@@ -136,6 +148,23 @@ document.addEventListener('DOMContentLoaded', function() {
     fontBold.addEventListener('click', () => { const obj = canvas.getActiveObject(); if (obj) { obj.set('fontWeight', obj.get('fontWeight') === 'bold' ? 'normal' : 'bold'); fontBold.classList.toggle('active'); canvas.renderAll(); } });
     fontItalic.addEventListener('click', () => { const obj = canvas.getActiveObject(); if (obj) { obj.set('fontStyle', obj.get('fontStyle') === 'italic' ? 'normal' : 'italic'); fontItalic.classList.toggle('active'); canvas.renderAll(); } });
     fontUnderline.addEventListener('click', () => { const obj = canvas.getActiveObject(); if (obj) { obj.set('underline', !obj.get('underline')); fontUnderline.classList.toggle('active'); canvas.renderAll(); } });
+    fontUppercase.addEventListener('click', () => {
+        const obj = canvas.getActiveObject();
+        if (obj && obj.isType('textbox')) {
+            if (!obj.data) {
+                obj.data = {};
+            }
+            obj.data.isUppercase = !obj.data.isUppercase;
+
+            if (obj.data.isUppercase) {
+                obj.set('text', obj.text.toUpperCase());
+            } else {
+                obj.set('text', obj.text.toLowerCase());
+            }
+            updateControls(obj);
+            canvas.renderAll();
+        }
+    });
 
     alignmentButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -174,6 +203,46 @@ document.addEventListener('DOMContentLoaded', function() {
                     crossOrigin: 'anonymous'
                 });
                 resizeCanvas(); // Re-center/zoom the canvas after new bg
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    document.getElementById('signature-uploader').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(f) {
+            const signatureObject = canvas.getObjects().find(obj => obj.data && obj.data.field === 'signature');
+            if (!signatureObject) {
+                alert('No se encontró el marcador de posición de la firma en la plantilla.');
+                return;
+            }
+
+            fabric.Image.fromURL(f.target.result, function(newSigImg) {
+                const placeholderWidth = signatureObject.getScaledWidth();
+                const placeholderHeight = signatureObject.getScaledHeight();
+                
+                const scaleX = placeholderWidth / newSigImg.width;
+                const scaleY = placeholderHeight / newSigImg.height;
+                const scale = Math.min(scaleX, scaleY);
+
+                newSigImg.scale(scale);
+
+                const newLeft = signatureObject.left + (placeholderWidth - newSigImg.getScaledWidth()) / 2;
+                const newTop = signatureObject.top + (placeholderHeight - newSigImg.getScaledHeight()) / 2;
+
+                newSigImg.set({
+                    left: newLeft,
+                    top: newTop,
+                    data: signatureObject.data,
+                    crossOrigin: 'anonymous'
+                });
+
+                canvas.remove(signatureObject);
+                canvas.add(newSigImg);
+                canvas.renderAll();
             });
         };
         reader.readAsDataURL(file);
@@ -233,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                alert('�1�70�1�73Plantilla guardada con �1�7�1�7xito!');
+                alert('Plantilla guardada con Éxito!');
                 if (data.new_template_json) { 
                     designerDataElement.dataset.template = JSON.stringify(data.new_template_json);
                     loadTemplate(data.new_template_json);
@@ -244,13 +313,13 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error de conexi�1�7�1�7n.');
+            alert('Error de conexión.');
         })
         .finally(() => { button.disabled = false; });
     });
 
     document.getElementById('reset-template').addEventListener('click', function() {
-        if (confirm('�1�70�1�77Restaurar la plantilla original? Perder�1�7�1�7s los cambios no guardados.')) {
+        if (confirm('Restaurar la plantilla original? Perderás los cambios no guardados.')) {
             loadTemplate(defaultTemplate);
             alert('Plantilla restaurada. Haz clic en "Guardar Cambios" para confirmar.');
         }

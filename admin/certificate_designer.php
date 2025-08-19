@@ -22,7 +22,11 @@ $default_template_json = file_get_contents('certificate_template.json');
             <div class="col-md-3">
                 <h5>Controles Generales</h5>
                 <hr>
-                <div class="mb-3"><label for="background-uploader" class="form-label">Cambiar Fondo</label><input type="file" id="background-uploader" class="form-control" accept="image/*"></div>
+                <div class="mb-3">
+                    <label for="background-uploader" class="form-label">Cambiar Fondo</label>
+                    <input type="file" id="background-uploader" class="form-control" accept="image/*">
+                    <div class="form-text">medida del fondo: 4679 x 3308 px</div>
+                </div>
                 <div class="mb-3"><label for="signature-uploader" class="form-label">Cambiar Firma</label><input type="file" id="signature-uploader" class="form-control" accept="image/png"></div>
                 <hr>
                 <button id="save-template" class="btn btn-primary w-100">Guardar Cambios</button>
@@ -30,7 +34,7 @@ $default_template_json = file_get_contents('certificate_template.json');
                 
                 <div id="object-controls" class="mt-4" style="display: none;">
                     <hr>
-                    <h5>Alineación de Objeto</h5>
+                    <h5>Alineaci贸n de Objeto</h5>
                     <div class="d-grid gap-2">
                         <button id="object-align-center-h" class="btn btn-outline-primary btn-sm">Centrar Horizontalmente</button>
                         <button id="object-align-center-v" class="btn btn-outline-primary btn-sm">Centrar Verticalmente</button>
@@ -41,12 +45,13 @@ $default_template_json = file_get_contents('certificate_template.json');
                     <hr>
                     <h5>Estilos de Texto</h5>
                     <div class="mb-2"><label for="font-family" class="form-label">Fuente</label><select id="font-family" class="form-select form-select-sm"><option>Arial</option><option>Helvetica</option><option>Times New Roman</option><option>Courier</option><option>Verdana</option></select></div>
-                    <div class="mb-2"><label for="font-size" class="form-label">Tamaño (pt)</label><input type="number" id="font-size" class="form-control form-control-sm" min="1"></div>
+                    <div class="mb-2"><label for="font-size" class="form-label">Tama帽o (pt)</label><input type="number" id="font-size" class="form-control form-control-sm" min="1"></div>
                     <div class="mb-2"><label for="font-color" class="form-label">Color</label><input type="color" id="font-color" class="form-control form-control-color w-100"></div>
                     <div class="d-flex justify-content-start gap-2 flex-wrap">
                         <button id="font-bold" class="btn btn-outline-secondary btn-sm"><i class="fas fa-bold"></i></button>
                         <button id="font-italic" class="btn btn-outline-secondary btn-sm"><i class="fas fa-italic"></i></button>
                         <button id="font-underline" class="btn btn-outline-secondary btn-sm"><i class="fas fa-underline"></i></button>
+                        <button id="font-uppercase" class="btn btn-outline-secondary btn-sm" title="Convertir a May煤sculas">Aa</button>
                         <div class="vr"></div>
                         <button id="align-left" class="btn btn-outline-secondary btn-sm"><i class="fas fa-align-left"></i></button>
                         <button id="align-center" class="btn btn-outline-secondary btn-sm"><i class="fas fa-align-center"></i></button>
